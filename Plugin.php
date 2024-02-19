@@ -838,11 +838,11 @@ class LoveKKComment_Plugin implements Typecho_Plugin_Interface
         // 初始化数据库
         $db = Typecho_Db::get();
         // 初始化类
-        $widget = new $className(Typecho_Request::getInstance(), Typecho_Widget_Helper_Empty::getInstance());
+        $widget = $className::alloc();
         // 查询数据
         $db->fetchRow($widget->select()->where($key . ' = ?', $val)->limit(1), array($widget, 'push'));
         
-        return $widget;
+        return clone $widget;
     }
     
     /**
